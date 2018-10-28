@@ -1,19 +1,15 @@
 <?php
 
 class url{
+  function get_http_response_code($url) {
+      $headers = get_headers($url);
+      return substr($headers[0], 9, 3);
+  }
 
-  function isExisturl($url)
+  function isExisturl($url,$code)
   {
-    $ch = curl_init();
-    curl_setopt_array($ch, array(
-          CURLOPT_RETURNTRANSFER => 1,
-          CURLOPT_URL => $url,
-          CURLOPT_CONNECTTIMEOUT=>10
-        ));
-    $http_respond = curl_exec($ch);
-    $http_respond = trim( strip_tags( $http_respond ) );
-    $http_code = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
-    if($http_code == 200 || $http_code == 302 || $http_code == 301)
+   
+    if($code == 200 || $code == 302 || $code == 301)
       {
         return 1;
       }
