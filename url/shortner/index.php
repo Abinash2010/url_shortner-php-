@@ -5,7 +5,8 @@ $url="http://facebook.com";
 $dbh=new db();
 $db=$dbh->getDB();
 $a=new url();
-echo $exist=$a->isExisturl($url);
+$code=$a->get_http_response_code($url);
+$exist=$a->isExisturl($url,$code);
 if($exist)
 {
   $a->isalreadyshort($db,$url);
